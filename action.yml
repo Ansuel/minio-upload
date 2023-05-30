@@ -3,7 +3,7 @@
 name: minio-upload
 description: "Action that lets you upload objects from a MinIO server"
 inputs:
-  url:
+  endpoint:
     description: "URL of the MinIO server"
     required: true
   access-key:
@@ -24,7 +24,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.url }}
+    - ${{ inputs.endpoint }}
     - ${{ inputs.access-key }}
     - ${{ inputs.secret-key }}
     - ${{ inputs.local-path }}
