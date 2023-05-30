@@ -22,6 +22,9 @@ inputs:
   remote-path:
     description: 'Path to remote object'
     required: true
+  use_mirror_overwrite:
+    description: 'Use mirror overwrite instead of cp'
+    type: boolean
 
 runs:
   using: 'docker'
@@ -33,3 +36,4 @@ runs:
     - ${{ inputs.secret-key }}
     - ${{ inputs.local-path }}
     - ${{ inputs.remote-path }}
+    - ${{ inputs.use_mirror_overwrite }}

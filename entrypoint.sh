@@ -35,11 +35,16 @@ access_key=$3
 secret_key=$4
 local_path=$5
 remote_path=$6
+use_mirror_overwrite=$7
 
 info "Will upload $local_path to $remote_path"
 
 mc alias set s3 $endpoint $access_key $secret_key
 ok_or_die "Could not set mc alias"
 
-mc cp -r $local_path s3/$bucket/$remote_path
+if [ $use_mirror_overwrite = 'true' ]; then
+	mc mirror --overwrite $local_path s3/$bucket/$remote_path
+else
+	mc cp -r $local_path s3/$bucket/$remote_path
+fi
 ok_or_die "Could not upload object"
