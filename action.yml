@@ -6,6 +6,9 @@ inputs:
   endpoint:
     description: "URL of the MinIO server"
     required: true
+  bucket:
+    description: "Target Bucket of the MinIO server"
+    required: true
   access-key:
     description: "Access Key for the MinIO server"
     required: true
@@ -25,6 +28,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.endpoint }}
+    - ${{ inputs.bucket }}
     - ${{ inputs.access-key }}
     - ${{ inputs.secret-key }}
     - ${{ inputs.local-path }}

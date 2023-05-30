@@ -25,20 +25,21 @@ ok_or_die() {
 	fi
 }
 
-if [[ $# -lt 5 ]] ; then
-	die "Usage: $0 endpoint access_key secret_key local_path remote_path"
+if [[ $# -lt 6 ]] ; then
+	die "Usage: $0 endpoint bucket access_key secret_key local_path remote_path"
 fi
 
 endpoint=$1
-access_key=$2
-secret_key=$3
-local_path=$4
-remote_path=$5
+bucket=$2
+access_key=$3
+secret_key=$4
+local_path=$5
+remote_path=$6
 
 info "Will upload $local_path to $remote_path"
 
 mc alias set s3 $endpoint $access_key $secret_key
 ok_or_die "Could not set mc alias"
 
-mc cp -r $local_path s3/$remote_path
+mc cp -r $local_path s3/$bucket/$remote_path
 ok_or_die "Could not upload object"
