@@ -42,13 +42,3 @@ ok_or_die "Could not set mc alias"
 
 mc cp -r $local_path s3/$remote_path
 ok_or_die "Could not upload object"
-
-if [[ $# -eq 6 ]] ; then
-	if [[ $6 -eq 1 ]] ; then
-		info "Will make $remote_path public"
-		mc anonymous -r set download s3/$remote_path
-	else
-		info "Will make $remote_path private"
-		mc anonymous -r set private s3/$remote_path || true
-	fi
-fi
